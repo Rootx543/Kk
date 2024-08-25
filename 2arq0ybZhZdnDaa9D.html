@@ -1,0 +1,267 @@
+<html><head><base href="https://websimcreationengine.com/"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Open Library Book Search</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    :root {
+        --primary-color: #6a3093;
+        --secondary-color: #a044ff;
+        --background-color: #f0f0f0;
+        --text-color: #333;
+        --card-bg-color: #fff;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: var(--background-color);
+    }
+
+    header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+        text-align: center;
+        margin: 0;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    nav {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+        font-weight: 300;
+        transition: opacity 0.3s ease;
+    }
+
+    nav a:hover {
+        opacity: 0.8;
+    }
+
+    #searchForm {
+        display: flex;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 50px;
+        overflow: hidden;
+    }
+
+    #searchInput {
+        flex-grow: 1;
+        padding: 15px 25px;
+        font-size: 18px;
+        border: none;
+        outline: none;
+    }
+
+    #searchButton {
+        padding: 15px 30px;
+        font-size: 18px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #searchButton:hover {
+        background-color: var(--secondary-color);
+    }
+
+    #results {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+    }
+
+    .book {
+        background-color: var(--card-bg-color);
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .book:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .book img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .book h3 {
+        margin: 0 0 10px 0;
+        font-size: 1.2em;
+        color: var(--primary-color);
+    }
+
+    .book p {
+        margin: 5px 0;
+        font-size: 0.9em;
+        color: #666;
+    }
+
+    footer {
+        margin-top: 40px;
+        text-align: center;
+        color: #666;
+        font-size: 0.9em;
+    }
+
+    .privacy-policy, .terms-of-service {
+        margin-top: 30px;
+        padding: 30px;
+        background-color: var(--card-bg-color);
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Loading Animation */
+    .loader {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+    }
+
+    .loader::after {
+        content: "";
+        width: 50px;
+        height: 50px;
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>
+</head>
+<body>
+    <header>
+        <h1>Open Library Book Search</h1>
+        <nav>
+            <a href="#privacy-policy">Privacy Policy</a> |
+            <a href="#terms-of-service">Terms of Service</a> |
+            <a href="#about">About</a> |
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <form id="searchForm">
+            <input type="text" id="searchInput" placeholder="Enter book title or author">
+            <button type="submit" id="searchButton">Search</button>
+        </form>
+        <div class="loader" id="loader"></div>
+        <div id="results"></div>
+
+        <section id="about">
+            <h2>About Our Service</h2>
+            <p>Our Open Library Book Search allows you to explore millions of books from the Open Library database. Find information about your favorite books, authors, and publication dates with ease.</p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or feedback, please don't hesitate to reach out to us at:</p>
+            <p>Email: support@websimcreationengine.com</p>
+            <p>Address: 123 Book Lane, Library City, LB 12345, United States</p>
+        </section>
+
+        <section id="privacy-policy" class="privacy-policy">
+            <h2>Privacy Policy</h2>
+            <p>Last updated: <script>document.write(new Date().toDateString())</script></p>
+            <p>At Open Library Book Search, we respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data and tell you about your privacy rights.</p>
+            <!-- ... (rest of the privacy policy content) ... -->
+        </section>
+
+        <section id="terms-of-service" class="terms-of-service">
+            <h2>Terms of Service</h2>
+            <p>Last updated: <script>document.write(new Date().toDateString())</script></p>
+            <p>By using our Open Library Book Search service, you agree to comply with and be bound by the following terms and conditions:</p>
+            <!-- ... (rest of the terms of service content) ... -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Open Library Book Search. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const searchForm = document.getElementById('searchForm');
+        const searchInput = document.getElementById('searchInput');
+        const resultsDiv = document.getElementById('results');
+        const loader = document.getElementById('loader');
+
+        searchForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (!query) return;
+
+            resultsDiv.innerHTML = '';
+            loader.style.display = 'flex';
+
+            try {
+                const response = await fetch(`https://openlibrary.org/search.json?q=${encodeURIComponent(query)}`);
+                const data = await response.json();
+
+                loader.style.display = 'none';
+
+                if (data.docs.length === 0) {
+                    resultsDiv.innerHTML = '<p>No books found.</p>';
+                    return;
+                }
+
+                data.docs.slice(0, 12).forEach(book => {
+                    const bookElement = document.createElement('div');
+                    bookElement.className = 'book';
+                    
+                    const coverUrl = book.cover_i 
+                        ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` 
+                        : 'https://via.placeholder.com/128x192.png?text=No+Cover';
+
+                    bookElement.innerHTML = `
+                        <img src="${coverUrl}" alt="${book.title}" width="128" height="192">
+                        <h3>${book.title}</h3>
+                        <p>Author: ${book.author_name ? book.author_name[0] : 'Unknown'}</p>
+                        <p>First Published: ${book.first_publish_year || 'Unknown'}</p>
+                    `;
+                    resultsDiv.appendChild(bookElement);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                loader.style.display = 'none';
+                resultsDiv.innerHTML = '<p>An error occurred while fetching books. Please try again.</p>';
+            }
+        });
+    </script>
+</body>
+</html>
